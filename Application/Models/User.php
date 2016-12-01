@@ -10,6 +10,4 @@ class User extends Model
 	
 	public $name;
 	public $email;
-	
-	
 }

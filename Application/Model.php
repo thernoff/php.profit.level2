@@ -4,7 +4,7 @@ namespace Application;
 
 use Application\Db;
 
-class Model
+abstract class Model
 {
 	const TABLE = '';
 	public static function findAll()
