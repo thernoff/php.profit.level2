@@ -2,16 +2,14 @@
 
 namespace Application\Models;
 
-use Application\Db;
+use Application\Model;
 
-class User
+class User extends Model
 {
+	const TABLE = 'users';
+	
 	public $name;
 	public $email;
 	
-	public static function findAll()
-	{
-		$db = new Db();
-		return $db->query('SELECT * FROM users', 'Application\Models\User');
-	}
+	
 }
