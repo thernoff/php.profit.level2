@@ -2,8 +2,9 @@
 namespace Application;
 
 class Db
-	extends Singleton
 {
+	use Singleton;
+	
 	protected $dbh;
 	
 	protected  function __construct()
