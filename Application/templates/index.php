@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title><?php echo $title;?></title>
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -18,12 +18,13 @@
     <![endif]-->
   </head>
   <body>
-    <h1>Users</h1>
+    <h1>Новости</h1>
     
 	<div class="panel panel-default">
-    <?php foreach($this->users as $user): ?>
-	    <div class="panel-heading"><?php echo $user->name; ?></div>
-	    <div class="panel-body"><?php echo $user->email; ?></div>
+    <?php foreach($news as $item): ?>
+	    <div class="panel-heading"><?php echo $item->title; ?></div>
+	    <div class="panel-body"><?php echo $item->text; ?></div>
+	    <div class="panel-body"><?php echo 'Автор: '.$item->author; ?></div>
     <?php endforeach; ?>
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

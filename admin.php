@@ -8,7 +8,7 @@ require __DIR__ . '/autoload.php';
 if ($_POST['submit'] == "Добавить"){
 	$title = $_POST['title'];
 	$text = $_POST['text'];
-	$author = "admin";
+	$author = 1;
 	$news = new News();
 	$news->title = $title;
 	$news->text = $text;
@@ -21,7 +21,7 @@ if ($_POST['submit'] == "Обновить"){
 	$id = $_POST['id'];
 	$title = $_POST['title'];
 	$text = $_POST['text'];
-	$author = "admin";
+	$author = 1;
 	$news = News::findById($id);
 	$news->title = $title;
 	$news->text = $text;
