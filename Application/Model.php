@@ -13,7 +13,8 @@ abstract class Model
 	public static function findAll()
 	{
 		$db = Db::instance();
-		return $db->query('SELECT * FROM ' . static::TABLE, static::class);
+		$res = $db->query('SELECT * FROM ' . static::TABLE, static::class);
+		return $res;
 	}
 	
 	public static function findById($id)
@@ -100,7 +101,7 @@ abstract class Model
 		}
 				
 		$sql = 'DELETE FROM ' . static::TABLE . ' WHERE id = :id';
-		echo $sql;
+		//echo $sql;
 		$values[':id'] = $this->id;
 		$db = Db::instance();
 		$db->execute($sql, $values);
