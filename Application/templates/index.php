@@ -18,8 +18,14 @@
     <![endif]-->
   </head>
   <body>
-    <h1>Hello, world!</h1>
-
+    <h1>Users</h1>
+    
+	<div class="panel panel-default">
+    <?php foreach($this->users as $user): ?>
+	    <div class="panel-heading"><?php echo $user->name; ?></div>
+	    <div class="panel-body"><?php echo $user->email; ?></div>
+    <?php endforeach; ?>
+	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
