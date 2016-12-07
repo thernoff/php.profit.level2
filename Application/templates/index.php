@@ -21,10 +21,10 @@
     <h1>Новости</h1>
     
 	<div class="panel panel-default">
-    <?php foreach($news as $item): ?>
-	    <div class="panel-heading"><?php echo $item->title; ?></div>
-	    <div class="panel-body"><?php echo $item->text; ?></div>
-	    <div class="panel-body"><?php echo 'Автор: '.$item->author; ?></div>
+    <?php foreach($news as $article): ?>
+	    <div class="panel-heading"><?php echo $article->title; ?></div>
+	    <div class="panel-body"><?php echo $article->text; ?></div>	    
+	    <div class="panel-body"><?php if(!empty($article->author)) echo 'Автор: '.$article->author; ?></div>
     <?php endforeach; ?>
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

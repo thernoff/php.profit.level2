@@ -5,7 +5,12 @@ namespace Application\Models;
 use Application\Model;
 use Application\Db;
 use Application\Models\Author;
-
+/*
+ * Class News
+ * @package Application\Models
+ * 
+ * @property \Application\Models\Author $author
+ */
 class News extends Model
 {
 	const TABLE = 'news';
@@ -36,6 +41,15 @@ class News extends Model
 			}else{
 				return "Без автора";
 			}
+		}
+	}
+	
+	public function __isset($key)
+	{
+		if ('author' == $key){
+			return !empty($this->author_id);
+		}else{
+			return false;
 		}
 	}
 }
