@@ -34,7 +34,7 @@ class News
 		echo $this->view->render(__DIR__ . '/../templates/index.php');
 	}
 	
-	protected function actionOne()
+	protected function actionArticle()
 	{
 		$id = (int)$_GET['id'];		
 		$this->view->title = "Мой сайт";		
