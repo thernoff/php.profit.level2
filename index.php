@@ -5,7 +5,7 @@ use Application\Controllers\Main;
 require __DIR__ . '/autoload.php';
 
 $uri = $_SERVER['REQUEST_URI'];
-
+//----По сути это код Роутера
 if (strpos($uri, '?')){
 	$pos = strpos($uri, '?');
 	$str = substr($uri, $pos+1);
@@ -35,5 +35,10 @@ if (strpos($uri, '?')){
 	$action = 'Index';
 }
 
-
-$controller->action($action);
+try{
+	$controller->action($action);
+}catch(\Application\Exceptions\Core $e){
+	echo "Возникло исключение приложения: " . $e->getMessage();
+}catch (\Application\Exceptions\Db $e){
+	echo "Проблемы с БД: " . $e->getMessage();
+}

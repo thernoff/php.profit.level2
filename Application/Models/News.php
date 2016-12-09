@@ -5,6 +5,7 @@ namespace Application\Models;
 use Application\Model;
 use Application\Db;
 use Application\Models\Author;
+use Application\MultiException;
 /*
  * Class News
  * @package Application\Models
@@ -51,5 +52,32 @@ class News extends Model
 		}else{
 			return false;
 		}
+	}
+	
+	public function __set($key, $value)
+	{
+		$e = new MultiException();
+		
+		if ('author' == $key){
+			$db = Db::instance();
+			if ($author = Author::findByName($value)){
+				$this->author_id = $author->id;
+			}else{
+				$this->author_id = null;
+				$e[] = new \Exception('В базе данных отсутствует пользователь с таким именем.');
+			}
+		}else{
+			$e[] = new \Exception('Вы пытаетесь сохранить данные с несуществующим ключом: '.$key);
+		}
+		
+		throw $e;
+	}
+	
+	public function fill($arr)
+	{			
+		$this->title = $arr['title'];
+		$this->text = $arr['text'];
+		$this->author = $arr['author'];
+		
 	}
 }

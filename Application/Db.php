@@ -9,7 +9,11 @@ class Db
 	
 	protected  function __construct()
 	{
-		$this->dbh = new \PDO('mysql:host=localhost;dbname=test','root','');
+		try {
+			$this->dbh = new \PDO('mysql:host=localhost;dbname=test','root','');
+		}catch(\PDOException $e){
+			throw new \Application\Exceptions\Db($e->getMessage()); 
+		}
 	}
 	/*
 	 * Метод execute() используем для выполнения запросов без возвращения данных
