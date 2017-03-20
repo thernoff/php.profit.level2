@@ -7,6 +7,4 @@ class MultiException
 	implements \ArrayAccess, \Iterator
 {
 	use TCollection;
-	
-	
 }

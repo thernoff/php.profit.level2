@@ -12,7 +12,7 @@ class Db
 		try {
 			$this->dbh = new \PDO('mysql:host=localhost;dbname=test','root','');
 		}catch(\PDOException $e){
-			throw new \Application\Exceptions\Db($e->getMessage()); 
+			throw new \Application\Exceptions\Db('Возникла проблема при подключении к базе данных.'); 
 		}
 	}
 	/*
@@ -20,22 +20,43 @@ class Db
 	 */
 	public function execute($sql, $arrParam = [])
 	{
-		$sth = $this->dbh->prepare($sql);
-		$res = $sth->execute($arrParam);
-		return $res;
+		$sth = $this->dbh->prepare($sql);		
+		if ($res = $sth->execute($arrParam)){				
+			return $res;
+		}else{				
+			throw new \Application\Exceptions\Db('Ошибка в запросе.');
+		}
+		
 	}
 	/*
 	 * Метод query() используем для выполнения запросов с возвращением данных
 	 */
 	public function query($sql, $class, $arrParam = [])
 	{
+		//echo $sql;
 		$sth = $this->dbh->prepare($sql);
-		$res = $sth->execute($arrParam);
-		if (false !== $res){
-			//return $sth->fetchAll();
-			return $sth->fetchAll(\PDO::FETCH_CLASS, $class);//Получаем массив, состоящий из объектов класса User
+		if ($res = $sth->execute($arrParam)){//true или false
+			return $sth->fetchAll(\PDO::FETCH_CLASS, $class);//Получаем массив, состоящий из объектов класса News
+		}else{
+			throw new \Application\Exceptions\Db('Ошибка в запросе.');
+			//return [];
 		}
-		return [];
+	}
+	/*
+	 * Метод queryEach() используем для выполнения запросов с возвращением данных в качестве генератора
+	 */
+	public function queryEach($sql, $class, $arrParam = [])
+	{
+		$sth = $this->dbh->prepare($sql);
+		if ($sth->execute($arrParam)){//true или false
+			$sth->setFetchMode(\PDO::FETCH_CLASS, $class);
+			while($res = $sth->fetch()){
+				yield $res;
+			}
+		}else{
+			throw new \Application\Exceptions\Db('Ошибка в запросе.');
+			//return [];
+		}
 	}
 	
 	public function lastInsertId()

@@ -17,6 +17,13 @@ abstract class Model
 		return $res;
 	}
 	
+	public static function findAllByGenerate()
+	{
+		$db = Db::instance();
+		$res = $db->queryEach('SELECT * FROM ' . static::TABLE, static::class);
+		return $res;
+	}
+	
 	public static function findById($id)
 	{
 		$db = Db::instance();

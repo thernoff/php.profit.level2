@@ -4,7 +4,7 @@ namespace Application\Exceptions;
 
 use Application\Logger;
 
-class Core
+class Error404
 	extends \Exception
 {
 	public function __construct($message = null, $code = null, $previous = null){
